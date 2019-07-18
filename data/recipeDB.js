@@ -2,13 +2,14 @@ const db = require('./db-config.js');
 
 module.exports = {
     findRecipes,
-    findIngredients
+    getShoppingList
 }
 
 function findRecipes() {
     return db('recipes');
 }
 
-function findIngredients() {
-    return db('ingredients');
+function getShoppingList(id) {
+    return db('ingredients')
+        .where({ recipe_id: id});
 }
