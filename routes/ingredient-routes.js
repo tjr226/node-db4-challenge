@@ -1,6 +1,6 @@
 const express = require('express');
 
-// add in DB model
+const db = require('../data/recipeDB.js');
 
 const router = express.Router();
 

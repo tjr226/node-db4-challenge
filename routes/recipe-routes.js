@@ -1,11 +1,17 @@
 const express = require('express');
 
-// add in DB model
+const db = require('../data/recipeDB.js');
 
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    res.status(200).json({ message: "recipe route success"});
+    db.findRecipes()
+    .then(recipes => {
+        res.status(200).json(recipes);
+    })
+    .catch(error => {
+        res.status(500).json(error);
+    })
 });
 
 module.exports = router;
