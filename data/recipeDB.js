@@ -1,12 +1,14 @@
 const db = require('./db-config.js');
 
 module.exports = {
-    findRecipes,
+    getRecipes,
     getShoppingList,
-    getInstructions
+    getInstructions,
+    getIngredients,
+    // getRecipeByIngredient
 }
 
-function findRecipes() {
+function getRecipes() {
     return db('recipes');
 }
 
@@ -20,3 +22,21 @@ function getInstructions(id) {
         .where({ recipe_id: id})
         .orderBy('step_number');
 }
+
+function getIngredients() {
+    return db('ingredients')
+    // .distinct('ingredient_name');
+}
+
+// function getIngredient(id) {
+//     return db('ingredients')
+//         .where({ id: id }).first()
+// }
+
+// function getRecipeByIngredient(id) {
+    // const ingredient = getIngredient(id);
+    // return ingredient;
+    // return db('ingredients')
+        // .where({ recipe_id: ingredient.recipe_id})
+        // .distinct('ingredient_name');
+// }
