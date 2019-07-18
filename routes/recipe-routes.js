@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
         })
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id/shoppinglist', (req, res) => {
     const id = req.params.id;
     // find ingredients using recipe_id
     db.getShoppingList(id)
@@ -25,7 +25,25 @@ router.get('/:id', (req, res) => {
                 res.status(404).json({ message: "not found" });
             }
         })
+        .catch(error => {
+            res.status(500).json(error);
+        })
+})
 
+router.get('/:id/instructions', (req, res) => {
+    const id = req.params.id;
+    // find instructions using recipe_id
+    db.getInstructions(id)
+    .then(recipe_steps => {
+        if (recipe_steps) {
+            res.status(200).json(recipe_steps);
+        } else {
+            res.status(404).json({ message: "not found" });
+        }
+    })
+    .catch(error => {
+        res.status(500).json(error);
+    })
 })
 
 module.exports = router;
